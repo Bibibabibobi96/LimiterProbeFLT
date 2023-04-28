@@ -1,10 +1,10 @@
-function [ flt_r, flt_z, flt_t, Lc ] = LPflt(flt, BR3D_total, BZ3D_total, Bphi3D_total)
+function [ flt_r, flt_z, flt_t, Lc ] = flt(flt, BR3D_total, BZ3D_total, Bphi3D_total)
 %flt struct should include:
 % n: number of truns
-% rStart zStart tStart :coordinates of start points
-% nphi and h are global
-% this program should be able to handel FLT with a series starting points
-% BUT it only works with ONE SINGLE starting point in current version
+% rStart zStart tStart :coordinates of start point
+% nphi and h are global variables
+%
+%
 
 % tic
 

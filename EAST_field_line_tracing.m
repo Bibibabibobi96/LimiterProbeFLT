@@ -28,8 +28,8 @@ else
 end
 
 % get RMP field
-if exist(['G:\限制器\LimiterProbeCode\LimiterProbeFLT\Bfield\',filename2])~=0
-    load(['G:\限制器\LimiterProbeCode\LimiterProbeFLT\Bfield\',filename2])
+if exist(['G:\闄愬埗鍣╘LimiterProbeCode\LimiterProbeFLT\Bfield\',filename2])~=0
+    load(['G:\闄愬埗鍣╘LimiterProbeCode\LimiterProbeFLT\Bfield\',filename2])
     cprintf('text','RMP field file ');
     cprintf([1,0.5,0],filename2);
     cprintf('text',' is loaded\n');
@@ -37,7 +37,7 @@ else
     disp('RMP field file does not exist, start calculating')
     EAST_RMP_current;
     disp('RMP field calculation finished')
-%     load(['G:\限制器\LimiterProbeCode\LimiterProbeFLT\Bfield\',filename2])
+%     load(['G:\闄愬埗鍣╘LimiterProbeCode\LimiterProbeFLT\Bfield\',filename2])
 end
 
 % check if the size of RMP filed match with EFIT field
@@ -219,7 +219,7 @@ for i = 1 : flt.nr_mesh * flt.nz_mesh
     flt.rStart = flt.rStart_real(1,i);
     flt.zStart = flt.zStart_real(1,i);
     flt.tStart = flt.tStart_real(1,i);
-    [flt.backward_r(:,i),flt.backward_z(:,i),flt.backward_t(:,i),flt.Lc(1,i)] = LPflt(flt,BR3D_total,BZ3D_total,Bphi3D_total);
+    [flt.backward_r(:,i),flt.backward_z(:,i),flt.backward_t(:,i),flt.Lc(1,i)] = flt(flt,BR3D_total,BZ3D_total,Bphi3D_total);
 %     toc
 end
 flt.backward_x = flt.backward_r .* cos(flt.backward_t);
@@ -235,7 +235,7 @@ for i = 1 : flt.nr_mesh * flt.nz_mesh
     flt.rStart = flt.rStart_real(1,i);
     flt.zStart = flt.zStart_real(1,i);
     flt.tStart = flt.tStart_real(1,i);
-    [flt.forward_r(:,i),flt.forward_z(:,i),flt.forward_t(:,i),flt.Lc(2,i)] = LPflt(flt,BR3D_total,BZ3D_total,Bphi3D_total);
+    [flt.forward_r(:,i),flt.forward_z(:,i),flt.forward_t(:,i),flt.Lc(2,i)] = flt(flt,BR3D_total,BZ3D_total,Bphi3D_total);
 end
 
 flt.forward_x = flt.forward_r .* cos(flt.forward_t);

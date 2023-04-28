@@ -2,7 +2,7 @@
 % clear
 clear all
 % load('high_m_coordinates.mat')
-load('RMPxyz.mat')
+load('G:\LimiterProbeFLT\RMPxyz.mat')
 load(['G:\ERGOS_HCFs\dig\notebooks\103950_5000.0.mat'])
 % clear
 clear BZ3D

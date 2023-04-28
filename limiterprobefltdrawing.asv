@@ -28,8 +28,8 @@ else
 end
 
 % get RMP field
-if exist(['G:\限制器\LimiterProbeCode\LimiterProbeFLT\Bfield\',filename2])~=0
-    load(['G:\限制器\LimiterProbeCode\LimiterProbeFLT\Bfield\',filename2])
+if exist(['G:\闄愬埗鍣╘LimiterProbeCode\LimiterProbeFLT\Bfield\',filename2])~=0
+    load(['G:\闄愬埗鍣╘LimiterProbeCode\LimiterProbeFLT\Bfield\',filename2])
     cprintf('text','RMP field file ');
     cprintf([1,0.5,0],filename2);
     cprintf('text',' is loaded\n');
@@ -37,7 +37,7 @@ else
     disp('RMP field file does not exist, start calculating')
     EAST_RMP_current;
     disp('RMP field calculation finished')
-%     load(['G:\限制器\LimiterProbeCode\LimiterProbeFLT\Bfield\',filename2])
+%     load(['G:\闄愬埗鍣╘LimiterProbeCode\LimiterProbeFLT\Bfield\',filename2])
 end
 
 % check if the size of RMP filed match with EFIT field
@@ -75,6 +75,7 @@ clear BR BZ Bt BR3D BZ3D Bphi3D
 
 figure(222)
 
+i = 5
 aa = nphi/2;
 t = tiledlayout(3,3);
 
@@ -142,21 +143,21 @@ t.Padding = 'none';
 %% -----Interp3-----
 % Interpolate field data to higher resolution
 
-R_interp = linspace(min(R),max(R),129*5);
-Z_interp = linspace(min(Z),max(Z),129*5);
-[interp_r,interp_z,interp_t] =...
-    meshgrid(linspace(min(R),max(R),129*5),linspace(min(Z),max(Z),129*5),linspace(0,2*pi,nphi));
-
-BR3D_total = interp3(R,Z,linspace(0,2*pi,nphi),Bfield.BR3D_total,interp_r,interp_z,interp_t,'cubic');
-BZ3D_total = interp3(R,Z,linspace(0,2*pi,nphi),Bfield.BZ3D_total,interp_r,interp_z,interp_t,'cubic');
-Bphi3D_total = interp3(R,Z,linspace(0,2*pi,nphi),Bfield.Bphi3D_total,interp_r,interp_z,interp_t,'cubic');
-
-clear interp_r interp_z interp_t
+% R_interp = linspace(min(R),max(R),129*5);
+% Z_interp = linspace(min(Z),max(Z),129*5);
+% [interp_r,interp_z,interp_t] =...
+%     meshgrid(linspace(min(R),max(R),129*5),linspace(min(Z),max(Z),129*5),linspace(0,2*pi,nphi));
+% 
+% BR3D_total = interp3(R,Z,linspace(0,2*pi,nphi),Bfield.BR3D_total,interp_r,interp_z,interp_t,'cubic');
+% BZ3D_total = interp3(R,Z,linspace(0,2*pi,nphi),Bfield.BZ3D_total,interp_r,interp_z,interp_t,'cubic');
+% Bphi3D_total = interp3(R,Z,linspace(0,2*pi,nphi),Bfield.Bphi3D_total,interp_r,interp_z,interp_t,'cubic');
+% 
+% clear interp_r interp_z interp_t
 % clear Bfield
 % 
-% BR3D_total = Bfield.BR3D_total;
-% BZ3D_total = Bfield.BZ3D_total;
-% Bphi3D_total = Bfield.Bphi3D_total;
+BR3D_total = Bfield.BR3D_total;
+BZ3D_total = Bfield.BZ3D_total;
+Bphi3D_total = Bfield.Bphi3D_total;
 
 BR3D_total(:,:,nphi+1) = BR3D_total(:,:,2);
 BZ3D_total(:,:,nphi+1) = BZ3D_total(:,:,2);
@@ -189,12 +190,12 @@ flt.bondary_z = bondary.z;
 % load('G:\LimiterProbeFLT\gogogo137.mat')
 % load ('FLTtest.mat')
 % load ('limiterprobeposition_inner0.1.mat')
-flt.nr_mesh = 15;
+flt.nr_mesh = 20;
 flt.nz_mesh = 1;
 
 % flt.rStart = linspace(2.2, 2.35, flt.nr_mesh);
 % flt.zStart = linspace(-0.5, 0.5, flt.nz_mesh);
-flt.rStart = linspace(1.9, 2.35, flt.nr_mesh);
+flt.rStart = linspace(1.6, 2.4, flt.nr_mesh);
 flt.zStart = linspace(0, 0, flt.nz_mesh);
 
 % flt.tStart=-t+2*pi*(13/32);
@@ -227,7 +228,7 @@ flt.backward_y = flt.backward_r .* sin(flt.backward_t);
 % flt.Lc(2,:) = flt.Lc(1,:);
 
 disp('Start Forward Tracing')
-h = -h;
+h=-h;
 
 for i = 1 : flt.nr_mesh * flt.nz_mesh
     disp(['Start tracing from point',num2str(i)]);

@@ -1,7 +1,8 @@
-function [B_next] = interp3_linear_Liao(R, Z, phi, B, r, z, t,R_min,R_max,Z_min,Z_max)
+function [B_next] = interp3_nearest_Liao(R, Z, phi, B, r, z, t,R_min,R_max,Z_min,Z_max)
 
 % global n nz nr nphi
-
+if sum(isnan([r, z, t])) == 0
+    
 nr=(r-R_min)/((R_max-R_min)/(length(R)-1))+1;
 nr_pre = floor(nr);
 nr_next = nr_pre+1;

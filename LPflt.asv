@@ -42,7 +42,7 @@ t = flt.tStart;
 R_max = flt.R_max;
 R_min = flt.R_min;
 Z_max = flt.Z_max;
-Z_min = flt.Z_min;
+Z_min = flt.Zm_in;
 
 
 
@@ -67,9 +67,9 @@ for ii = 1 : flt.n * nphi
 
 
 
-%         dBr(1) = interp2(R,Z,BR3D_total(:,:,n_ind1),r(ii),z(ii),'linear',nan);
-%         dBz(1) = interp2(R,Z,BZ3D_total(:,:,n_ind1 ),r(ii),z(ii),'linear',nan);
-%         dBp(1) = interp2(R,Z,Bphi3D_total(:,:,n_ind1),r(ii),z(ii),'linear',nan);
+    %     dBr(1) = interp2(R,Z,BR3D_total(:,:,n_ind1),r(ii),z(ii),'linear',nan);
+    %     dBz(1) = interp2(R,Z,BZ3D_total(:,:,n_ind1 ),r(ii),z(ii),'linear',nan);
+    %     dBp(1) = interp2(R,Z,Bphi3D_total(:,:,n_ind1),r(ii),z(ii),'linear',nan);
     dBr(1) = interp3_nearest_Liao(R,Z,phi,BR3D_total,r(ii),z(ii),t(ii),R_min,R_max,Z_min,Z_max);
     dBz(1) = interp3_nearest_Liao(R,Z,phi,BZ3D_total,r(ii),z(ii),t(ii),R_min,R_max,Z_min,Z_max);
     dBp(1) = interp3_nearest_Liao(R,Z,phi,Bphi3D_total,r(ii),z(ii),t(ii),R_min,R_max,Z_min,Z_max);
@@ -77,12 +77,12 @@ for ii = 1 : flt.n * nphi
     dz(1) = dBz(1)./dBp(1);
 
 
-%         dBr(2) = interp3(R,Z,phi(n_ind1: n_ind2),BR3D_total(:,:,n_ind1: n_ind2),...
-%             r(ii)+(h/2)*dr(1), z(ii)+(h/2)*dz(1), mod(t(ii)+h/2,2*pi),'linear',nan);
-%         dBz(2) = interp3(R,Z,phi(n_ind1: n_ind2),BZ3D_total(:,:,n_ind1: n_ind2),...
-%             r(ii)+(h/2)*dr(1), z(ii)+(h/2)*dz(1), mod(t(ii)+h/2,2*pi),'linear',nan);
-%         dBp(2) = interp3(R,Z,phi(n_ind1: n_ind2),Bphi3D_total(:,:,n_ind1:n_ind2),...
-%             r(ii)+(h/2)*dr(1), z(ii)+(h/2)*dz(1), mod(t(ii)+h/2,2*pi),'linear',nan);
+    %     dBr(2) = interp3(R,Z,phi(n_ind1: n_ind2),BR3D_total(:,:,n_ind1: n_ind2),...
+    %         r(ii)+(h/2)*dr(1), z(ii)+(h/2)*dz(1), mod(t(ii)+h/2,2*pi),'linear',nan);
+    %     dBz(2) = interp3(R,Z,phi(n_ind1: n_ind2),BZ3D_total(:,:,n_ind1: n_ind2),...
+    %         r(ii)+(h/2)*dr(1), z(ii)+(h/2)*dz(1), mod(t(ii)+h/2,2*pi),'linear',nan);
+    %     dBp(2) = interp3(R,Z,phi(n_ind1: n_ind2),Bphi3D_total(:,:,n_ind1:n_ind2),...
+    %         r(ii)+(h/2)*dr(1), z(ii)+(h/2)*dz(1), mod(t(ii)+h/2,2*pi),'linear',nan);
     dBr(2) = interp3_nearest_Liao(R,Z,phi,BR3D_total,r(ii)+(h/2)*dr(1),z(ii)+(h/2)*dz(1),t(ii)+h/2,R_min,R_max,Z_min,Z_max);
     dBz(2) = interp3_nearest_Liao(R,Z,phi,BZ3D_total,r(ii)+(h/2)*dr(1),z(ii)+(h/2)*dz(1),t(ii)+h/2,R_min,R_max,Z_min,Z_max);
     dBp(2) = interp3_nearest_Liao(R,Z,phi,Bphi3D_total,r(ii)+(h/2)*dr(1),z(ii)+(h/2)*dz(1),t(ii)+h/2,R_min,R_max,Z_min,Z_max);
@@ -92,12 +92,12 @@ for ii = 1 : flt.n * nphi
     dr(2) = dBr(2)./dBp(2);
     dz(2) = dBz(2)./dBp(2);
 
-%         dBr(3) = interp3(R,Z,phi(n_ind1:n_ind2),BR3D_total(:,:,n_ind1:n_ind2),...
-%             r(ii)+(h/2)*dr(2),z(ii)+(h/2)*dz(2),mod(t(ii)+h/2,2*pi),'linear',nan);
-%         dBz(3) = interp3(R,Z,phi(n_ind1:n_ind2),BZ3D_total(:,:,n_ind1:n_ind2),...
-%             r(ii)+(h/2)*dr(2),z(ii)+(h/2)*dz(2),mod(t(ii)+h/2,2*pi),'linear',nan);
-%         dBp(3) = interp3(R,Z,phi(n_ind1:n_ind2),Bphi3D_total(:,:,n_ind1:n_ind2),...
-%             r(ii)+(h/2)*dr(2),z(ii)+(h/2)*dz(2),mod(t(ii)+h/2,2*pi),'linear',nan);
+    %     dBr(3) = interp3(R,Z,phi(n_ind1:n_ind2),BR3D_total(:,:,n_ind1:n_ind2),...
+    %         r(ii)+(h/2)*dr(2),z(ii)+(h/2)*dz(2),mod(t(ii)+h/2,2*pi),'linear',nan);
+    %     dBz(3) = interp3(R,Z,phi(n_ind1:n_ind2),BZ3D_total(:,:,n_ind1:n_ind2),...
+    %         r(ii)+(h/2)*dr(2),z(ii)+(h/2)*dz(2),mod(t(ii)+h/2,2*pi),'linear',nan);
+    %     dBp(3) = interp3(R,Z,phi(n_ind1:n_ind2),Bphi3D_total(:,:,n_ind1:n_ind2),...
+    %         r(ii)+(h/2)*dr(2),z(ii)+(h/2)*dz(2),mod(t(ii)+h/2,2*pi),'linear',nan);
     dBr(3) = interp3_nearest_Liao(R,Z,phi,BR3D_total,r(ii)+(h/2)*dr(2),z(ii)+(h/2)*dz(2),t(ii)+h/2,R_min,R_max,Z_min,Z_max);
     dBz(3) = interp3_nearest_Liao(R,Z,phi,BZ3D_total,r(ii)+(h/2)*dr(2),z(ii)+(h/2)*dz(2),t(ii)+h/2,R_min,R_max,Z_min,Z_max);
     dBp(3) = interp3_nearest_Liao(R,Z,phi,Bphi3D_total,r(ii)+(h/2)*dr(2),z(ii)+(h/2)*dz(2),t(ii)+h/2,R_min,R_max,Z_min,Z_max);
@@ -165,9 +165,9 @@ end
 
 
 
-flt_r = r';
-flt_t = t';
-flt_z = z';
+flt_r(1:size(r,1)) = r;
+flt_t(1:size(t,1)) = t;
+flt_z(1:size(z,1)) = z;
 
 end
 % clear r t z

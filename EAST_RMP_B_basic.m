@@ -83,7 +83,7 @@ for phi = 0:2*pi/(nphi-1):2*pi
         for i = 1:n:length(coils_x{5})-n
             
             
-            [Br0,Bz0,Bphi0]=finiteelementC(I,(coils_x{j}(i)),coils_y{j}(i),coils_z{j}(i),...
+            [Br0,Bz0,Bphi0]=finiteelementB(I,(coils_x{j}(i)),coils_y{j}(i),coils_z{j}(i),...
                 coils_x{j}(i+n),coils_y{j}(i+n),coils_z{j}(i+n),R_3D,Z_3D,phi);
             if i == 1
                 Br{j} = Br0;

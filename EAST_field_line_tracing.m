@@ -35,7 +35,7 @@ if exist(['G:\限制器\LimiterProbeCode\LimiterProbeFLT\Bfield\',filename2])~=0
     cprintf('text',' is loaded\n');
 else 
     disp('RMP field file does not exist, start calculating')
-    EAST_RMP_current;
+    EAST_RMP_B;
     disp('RMP field calculation finished')
 %     load(['G:\限制器\LimiterProbeCode\LimiterProbeFLT\Bfield\',filename2])
 end
@@ -142,25 +142,25 @@ t.Padding = 'none';
 %% -----Interp3-----
 % Interpolate field data to higher resolution
 
-R_interp = linspace(min(R),max(R),129*5);
-Z_interp = linspace(min(Z),max(Z),129*5);
-[interp_r,interp_z,interp_t] =...
-    meshgrid(linspace(min(R),max(R),129*5),linspace(min(Z),max(Z),129*5),linspace(0,2*pi,nphi));
-
-BR3D_total = interp3(R,Z,linspace(0,2*pi,nphi),Bfield.BR3D_total,interp_r,interp_z,interp_t,'cubic');
-BZ3D_total = interp3(R,Z,linspace(0,2*pi,nphi),Bfield.BZ3D_total,interp_r,interp_z,interp_t,'cubic');
-Bphi3D_total = interp3(R,Z,linspace(0,2*pi,nphi),Bfield.Bphi3D_total,interp_r,interp_z,interp_t,'cubic');
-
-clear interp_r interp_z interp_t
-clear Bfield
+% R_interp = linspace(min(R),max(R),129*5);
+% Z_interp = linspace(min(Z),max(Z),129*5);
+% [interp_r,interp_z,interp_t] =...
+%     meshgrid(linspace(min(R),max(R),129*5),linspace(min(Z),max(Z),129*5),linspace(0,2*pi,nphi));
 % 
-% BR3D_total = Bfield.BR3D_total;
-% BZ3D_total = Bfield.BZ3D_total;
-% Bphi3D_total = Bfield.Bphi3D_total;
+% BR3D_total = interp3(R,Z,linspace(0,2*pi,nphi),Bfield.BR3D_total,interp_r,interp_z,interp_t,'cubic');
+% BZ3D_total = interp3(R,Z,linspace(0,2*pi,nphi),Bfield.BZ3D_total,interp_r,interp_z,interp_t,'cubic');
+% Bphi3D_total = interp3(R,Z,linspace(0,2*pi,nphi),Bfield.Bphi3D_total,interp_r,interp_z,interp_t,'cubic');
+
+BR3D_total = Bfield.BR3D_total;
+BZ3D_total = Bfield.BZ3D_total;
+Bphi3D_total = Bfield.Bphi3D_total;
 
 BR3D_total(:,:,nphi+1) = BR3D_total(:,:,2);
 BZ3D_total(:,:,nphi+1) = BZ3D_total(:,:,2);
 Bphi3D_total(:,:,nphi+1) = Bphi3D_total(:,:,2);
+
+clear interp_r interp_z interp_t
+clear Bfield
 
 %% Field Line Tracing
 clear flt
@@ -259,7 +259,7 @@ toc
 
 Lc_pcolor
 
-field_line_plot 
+% field_line_plot 
 
 
 

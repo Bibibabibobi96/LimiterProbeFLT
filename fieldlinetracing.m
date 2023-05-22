@@ -1,4 +1,4 @@
-function [ flt_r, flt_z, flt_t, Lc ] = flt(flt, BR3D_total, BZ3D_total, Bphi3D_total)
+function [ flt_r, flt_z, flt_t, Lc ] = fieldlinetracing(flt, BR3D_total, BZ3D_total, Bphi3D_total)
 %flt struct should include:
 % n: number of truns
 % rStart zStart tStart :coordinates of start point

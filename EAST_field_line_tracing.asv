@@ -204,16 +204,16 @@ flt.nz_mesh = 1;
 % flt.rStart = linspace(2.27, 2.27, flt.nr_mesh);
 % flt.zStart = linspace(0, 0, flt.nz_mesh);
 
-flt.rStart = 2.27 + 0.03 * cos(linspace(0,2*pi,20));
-flt.zStart = 0.03 * sin(linspace(0,2*pi,20));
+flt.rStart = 2.27 + 0.01 * cos(linspace(0,2*pi,20));
+flt.zStart = 0.01 * sin(linspace(0,2*pi,20));
 
 % flt.tStart=-t+2*pi*(13/32);
 %correction to real EAST toroidal angel
 
 % t=t+2*pi*(13/32);
-% [flt.rStart,flt.zStart] = meshgrid(flt.rStart,flt.zStart);
-flt.rStart_real = reshape(flt.rStart,1, flt.nr_mesh * flt.nz_mesh);
-flt.zStart_real = reshape(flt.zStart,1, flt.nr_mesh * flt.nz_mesh);
+[flt.rStart,flt.zStart] = meshgrid(flt.rStart,flt.zStart);
+flt.rStart_real = reshape(flt.rStart,1, size(flt.rStart,1) * size(flt.rStart,2));
+flt.zStart_real = reshape(flt.zStart,1, size(flt.zStart,1) * size(flt.zStart,2));
 flt.tStart_real = 0.0335 * ones(1,flt.nr_mesh * flt.nz_mesh);
 flt.nphiStart = ceil(flt.tStart_real(1)/(2*pi/(nphi-1)));
 
